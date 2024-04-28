@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctwpjkrmdesau"]
+
+[ext_resource type="PackedScene" uid="uid://ctmjkt8tarcnl" path="res://Player.tscn" id="1_763mk"]
+[ext_resource type="PackedScene" uid="uid://w8hnl8bo7deg" path="res://Block.tscn" id="2_1m3en"]
+[ext_resource type="PackedScene" uid="uid://il2vhs3n1mt7" path="res://Ball.tscn" id="3_lfnmn"]
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_763mk")]
+
+[node name="Block" parent="." instance=ExtResource("2_1m3en")]
+
+[node name="Ball" parent="." instance=ExtResource("3_lfnmn")]

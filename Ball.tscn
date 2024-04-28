@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://il2vhs3n1mt7"]
+
+[ext_resource type="Texture2D" uid="uid://ci71k6e51esnv" path="res://art/Spell_slow_bullet.webp" id="1_4di8n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ausvl"]
+radius = 3.0
+
+[node name="Ball" type="RigidBody2D"]
+position = Vector2(320, 192)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.8147e-06, -3.8147e-06)
+scale = Vector2(0.0996906, 0.100619)
+texture = ExtResource("1_4di8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ausvl")
