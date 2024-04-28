@@ -22,3 +22,5 @@ offset_left = -40.0
 offset_right = 40.0
 offset_bottom = 8.0
 texture = SubResource("CanvasTexture_4t252")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

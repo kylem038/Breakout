@@ -8,9 +8,24 @@ public partial class Ball : RigidBody2D
 		Position = position;
 	}
 
+	private void PlayerCollision()
+	{
+		// get current linear velocity
+		Vector2 currentVelocity = LinearVelocity;
+
+		LinearVelocity = new Vector2(currentVelocity.X, -currentVelocity.Y);
+	}
+
+	private void ConnectSignals()
+	{
+		Player player = GetNode<Player>("/root/Main/Player");
+		player.Hit += PlayerCollision;
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ConnectSignals();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
