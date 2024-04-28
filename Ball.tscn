@@ -8,6 +8,8 @@ radius = 6.08276
 
 [node name="Ball" type="RigidBody2D"]
 position = Vector2(320, 192)
+gravity_scale = 0.0
+linear_damp_mode = 1
 script = ExtResource("1_n6334")
 metadata/_edit_group_ = true
 

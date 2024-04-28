@@ -14,7 +14,7 @@ public partial class Main : Node
 		Marker2D ballStartPosition = GetNode<Marker2D>("BallStartPosition");
 
 		ball.Place(ballStartPosition.Position);
-		ball.LinearVelocity = new Vector2(0, -1);
+		ball.LinearVelocity = new Vector2(0, 100);
 
 		AddChild(ball);
 	}
