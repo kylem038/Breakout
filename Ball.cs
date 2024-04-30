@@ -13,7 +13,10 @@ public partial class Ball : RigidBody2D
 		// get current linear velocity
 		Vector2 currentVelocity = LinearVelocity;
 
-		LinearVelocity = new Vector2(currentVelocity.X, -currentVelocity.Y);
+		// Reverse direction no matter the direction the collision comes from (X or Y)
+		currentVelocity *= -1;
+
+		LinearVelocity = currentVelocity;
 	}
 
 	private void BlockCollision()
@@ -21,7 +24,10 @@ public partial class Ball : RigidBody2D
 		// get current linear velocity
 		Vector2 currentVelocity = LinearVelocity;
 
-		LinearVelocity = new Vector2(currentVelocity.X, -currentVelocity.Y);
+		// Reverse direction no matter the direction the collision comes from (X or Y)
+		currentVelocity *= -1;
+
+		LinearVelocity = currentVelocity;
 	}
 
 	private void ConnectSignals()
