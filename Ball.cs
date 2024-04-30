@@ -31,11 +31,6 @@ public partial class Ball : RigidBody2D
 
 	private void ConnectSignals()
 	{
-		Player player = GetNode<Player>("/root/Main/Player");
-		// Block block = GetNode<Block>("/root/Main/Block");
-		player.Hit += PlayerCollision;
-		// Need to do this on each individual block
-		// block.Hit += BlockCollision;
 	}
 
 	// Called when the node enters the scene tree for the first time.

@@ -1,14 +1,10 @@
 using Godot;
 
-public partial class Player : Area2D
+public partial class Player : RigidBody2D
 {
 	[Signal]
 	public delegate void HitEventHandler();
 
-	private void OnBodyEntered(Node2D body) 
-	{
-		EmitSignal(SignalName.Hit);
-	}
 	public override void _Ready()
 	{
 	}
@@ -16,5 +12,20 @@ public partial class Player : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (Input.IsActionPressed("player_left"))
+		{
+			LinearVelocity = new Vector2(-200, 0);
+		}
+
+		else if (Input.IsActionPressed("player_right"))
+		{
+			LinearVelocity = new Vector2(200, 0);
+		}
+		else
+		{
+			LinearVelocity = Vector2.Zero;
+		}
+
+
 	}
 }

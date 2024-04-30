@@ -1,14 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctmjkt8tarcnl"]
+[gd_scene load_steps=5 format=3 uid="uid://ctmjkt8tarcnl"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_jprjw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qvu1k"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0m57"]
 size = Vector2(80, 8)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_4t252"]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="RigidBody2D"]
 position = Vector2(320, 320)
+disable_mode = 2
+mass = 1000.0
+physics_material_override = SubResource("PhysicsMaterial_qvu1k")
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp_mode = 1
 script = ExtResource("1_jprjw")
 metadata/_edit_group_ = true
 
@@ -22,5 +32,3 @@ offset_left = -40.0
 offset_right = 40.0
 offset_bottom = 8.0
 texture = SubResource("CanvasTexture_4t252")
-
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
