@@ -8,14 +8,13 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_qg1h1")
 BallScene = ExtResource("3_lfnmn")
+BlockScene = ExtResource("2_1m3en")
 
 [node name="Player" parent="." instance=ExtResource("1_763mk")]
 disable_mode = 1
 
-[node name="Block" parent="." instance=ExtResource("2_1m3en")]
-position = Vector2(296, 192)
-
 [node name="PlayerStartPosition" type="Marker2D" parent="."]
+position = Vector2(320, 320)
 
 [node name="BallStartPosition" type="Marker2D" parent="."]
 position = Vector2(320, 256)
