@@ -11,7 +11,6 @@ public partial class Main : Node
 	[Export]
 	public PackedScene BlockScene {get; set;}
 
-	// Refactor this into 3 loops, one for each row
 	private int[] columnPositions = {
 		64, 128, 192, 256, 320, 384, 448, 512
 	};
@@ -30,7 +29,7 @@ public partial class Main : Node
 		Marker2D ballStartPosition = GetNode<Marker2D>("BallStartPosition");
 
 		ball.Place(ballStartPosition.Position);
-		// ball.LinearVelocity = new Vector2(0, 100);
+		ball.LinearVelocity = new Vector2(GD.RandRange(-300, 300), -150);
 
 		AddChild(ball);
 
