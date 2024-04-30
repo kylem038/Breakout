@@ -21,3 +21,5 @@ modulate = Color(0.752941, 0.752941, 0.752941, 1)
 offset_right = 48.0
 offset_bottom = 8.0
 texture = SubResource("CanvasTexture_2bkrb")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

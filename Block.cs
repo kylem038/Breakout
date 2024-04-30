@@ -1,8 +1,16 @@
 using Godot;
-using System;
 
 public partial class Block : Area2D
 {
+	[Signal]
+	public delegate void HitEventHandler();
+
+	private void OnBodyEntered(Node2D body)
+	{
+		EmitSignal(SignalName.Hit);
+	}
+
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
