@@ -25,7 +25,5 @@ public partial class Player : RigidBody2D
 		{
 			LinearVelocity = Vector2.Zero;
 		}
-
-
 	}
 }

@@ -5,6 +5,11 @@ public partial class Block : StaticBody2D
 	[Signal]
 	public delegate void HitEventHandler();
 
+	private void OnBodyEntered(Node2D body)
+	{
+		QueueFree();
+	}
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
