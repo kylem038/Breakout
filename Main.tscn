@@ -46,7 +46,7 @@ position = Vector2(320, 320)
 position = Vector2(320, 312)
 
 [node name="TopWall" type="StaticBody2D" parent="."]
-position = Vector2(320, 23)
+position = Vector2(320, 20)
 disable_mode = 2
 physics_material_override = SubResource("PhysicsMaterial_jqytx")
 metadata/_edit_group_ = true
