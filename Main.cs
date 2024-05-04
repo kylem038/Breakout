@@ -14,7 +14,9 @@ public partial class Main : Node
 
 	public void ScorePoint()
 	{
+		HUD hud = GetNode<HUD>("HUD");
 		_score++;
+		hud.UpdateScore(_score);
 	}
 
 	// We want a 1px gutter between each block
@@ -23,14 +25,15 @@ public partial class Main : Node
 		1, 50, 99, 148, 197, 246, 295, 344, 393, 442, 491, 540, 589
 	};
 
+	// We want a 1px gutter between each block
+	// Blocks are 8px in height
+	// +19 to account for score at top
+	private int[] rowPositions = { 20, 29, 38, 47, 56, 65, 74 };
+
 	private Vector2 getBlockSpawnPosition(int column, int row)
 	{
 		return new Vector2(column, row);
 	}
-
-	// We want a 1px gutter between each block
-	// Blocks are 8px in height
-	private int[] rowPositions = { 1, 10, 19, 28, 37, 46, 55 };
 
 	Color[] colors = {
 		Color.Color8(247, 47, 150, 255), // Pink
@@ -72,6 +75,14 @@ public partial class Main : Node
 				block.SetColor(colors[i]);
 			}
 		}
+	}
+
+	private void NewGame()
+	{
+		// Set score to 0
+		HUD hud = GetNode<HUD>("HUD");
+		_score = 0;
+		hud.UpdateScore(_score);
 	}
 
 	// Called when the node enters the scene tree for the first time.

@@ -28,7 +28,7 @@ public partial class HUD : CanvasLayer
 
 	public void UpdateScore(int score)
 	{
-		GetNode<Label>("ScoreLabel").Text = score.ToString();
+		GetNode<Label>("ScoreLabel").Text = "Score: " + score.ToString();
 	}
 
 	private void OnStartButtonPressed()
