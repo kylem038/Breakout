@@ -52,9 +52,6 @@ public partial class Main : Node
 		ball.LinearVelocity = new Vector2(GD.RandRange(-300, 300), -150);
 
 		AddChild(ball);
-
-		// Spawn the blocks
-		SpawnBlocks();
 	}
 
 	private void SpawnBlocks()
@@ -80,8 +77,8 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		StartRound();
-
+		// Spawn the blocks
+		SpawnBlocks();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
