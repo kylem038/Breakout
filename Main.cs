@@ -11,13 +11,7 @@ public partial class Main : Node
 	public PackedScene BlockScene {get; set;}
 
 	private int _score = 0;
-
-	public void ScorePoint()
-	{
-		HUD hud = GetNode<HUD>("HUD");
-		_score++;
-		hud.UpdateScore(_score);
-	}
+	private int _health = 4;
 
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
@@ -44,6 +38,29 @@ public partial class Main : Node
 		Color.Color8(30, 81, 123, 255), // Blue
 		Color.Color8(159, 90, 253, 255), // Purple
 	};
+
+	public void ScorePoint()
+	{
+		HUD hud = GetNode<HUD>("HUD");
+		_score++;
+		hud.UpdateScore(_score);
+	}
+
+	private void OnBottomBoundaryBodyEntered(Node2D body)
+	{
+		HUD hud = GetNode<HUD>("HUD");
+		if (_health == 1)
+		{
+			GD.Print("GAME OVER");
+		}
+		else
+		{
+			_health -= 1;
+			hud.UpdateHealth(_health);
+		}
+
+
+	}
 
 	private void StartRound()
 	{
@@ -83,6 +100,10 @@ public partial class Main : Node
 		HUD hud = GetNode<HUD>("HUD");
 		_score = 0;
 		hud.UpdateScore(_score);
+
+		// Set health to 4
+		_health = 4;
+		hud.UpdateHealth(_health);
 	}
 
 	// Called when the node enters the scene tree for the first time.

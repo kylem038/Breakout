@@ -31,6 +31,11 @@ public partial class HUD : CanvasLayer
 		GetNode<Label>("ScoreLabel").Text = "Score: " + score.ToString();
 	}
 
+	public void UpdateHealth(int health)
+	{
+		GetNode<Label>("HealthLabel").Text = "Health: " + health.ToString();
+	}
+
 	private void OnStartButtonPressed()
 	{
 		GetNode<Button>("StartButton").Hide();

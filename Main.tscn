@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctwpjkrmdesau"]
+[gd_scene load_steps=15 format=3 uid="uid://ctwpjkrmdesau"]
 
 [ext_resource type="PackedScene" uid="uid://ctmjkt8tarcnl" path="res://Player.tscn" id="1_763mk"]
 [ext_resource type="Script" path="res://Main.cs" id="1_qg1h1"]
@@ -23,6 +23,9 @@ friction = 0.0
 bounce = 1.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hetso"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk8s5"]
+size = Vector2(640, 20)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2116v"]
 friction = 0.0
@@ -69,12 +72,21 @@ one_way_collision = true
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
 position = Vector2(320, 360)
+collision_layer = 9
+collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_hqfrv")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
 shape = SubResource("WorldBoundaryShape2D_hetso")
 one_way_collision = true
+
+[node name="BottomBoundary" type="Area2D" parent="BottomWall"]
+collision_layer = 10
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall/BottomBoundary"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_sk8s5")
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
 position = Vector2(0, 192)
@@ -88,4 +100,5 @@ one_way_collision = true
 
 [node name="HUD" parent="." instance=ExtResource("5_tp38a")]
 
+[connection signal="body_entered" from="BottomWall/BottomBoundary" to="." method="OnBottomBoundaryBodyEntered"]
 [connection signal="StartGame" from="HUD" to="." method="StartRound"]
