@@ -11,8 +11,10 @@ public partial class Main : Node
 	[Export]
 	public PackedScene BlockScene {get; set;}
 
+	// We want a 1px gutter between each block
+	// Blocks are 48px wide
 	private int[] columnPositions = {
-		64, 128, 192, 256, 320, 384, 448, 512
+		1, 50, 99, 148, 197, 246, 295, 344, 393, 442, 491, 540, 589
 	};
 
 	private Vector2 getBlockSpawnPosition(int column, int row)
@@ -20,7 +22,9 @@ public partial class Main : Node
 		return new Vector2(column, row);
 	}
 
-	private int[] rowPositions = { 0, 8, 16 };
+	// We want a 1px gutter between each block
+	// Blocks are 8px in height
+	private int[] rowPositions = { 1, 10, 19, 28, 37, 46, 55 };
 
 	private void StartRound()
 	{

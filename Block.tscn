@@ -22,7 +22,7 @@ physics_material_override = SubResource("PhysicsMaterial_cru71")
 script = ExtResource("1_t8rja")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(0.752941, 0.752941, 0.752941, 1)
+modulate = Color(0.0666667, 0, 0.858824, 1)
 offset_right = 48.0
 offset_bottom = 8.0
 texture = SubResource("CanvasTexture_2bkrb")
