@@ -5,7 +5,10 @@ public partial class Block : StaticBody2D
 	[Signal]
 	public delegate void HitEventHandler();
 
-	private int _increaseSpeed = 7;
+	[Signal]
+	public delegate void ScoreEventHandler();
+
+	private int _increaseSpeed = 5;
 
 	// Reference to the TextureRect child node
     private TextureRect textureRect;
@@ -19,6 +22,7 @@ public partial class Block : StaticBody2D
 	{
 		Ball ball = GetNodeOrNull<Ball>("/root/Main/Ball");
 		ball?.IncreaseVelocity(_increaseSpeed);
+		EmitSignal(SignalName.Score);
 		QueueFree();
 	}
 

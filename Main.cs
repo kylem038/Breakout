@@ -10,6 +10,13 @@ public partial class Main : Node
 	[Export]
 	public PackedScene BlockScene {get; set;}
 
+	private int _score = 0;
+
+	public void ScorePoint()
+	{
+		_score++;
+	}
+
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
 	private int[] columnPositions = {
@@ -60,6 +67,8 @@ public partial class Main : Node
 				Block block = BlockScene.Instantiate<Block>();
 				// Set the position of the new node
 				block.Position = getBlockSpawnPosition(column, rowPositions[i]);
+				// Connect Score signal
+				block.Score += ScorePoint;
 				// Add the new node to the scene
 				AddChild(block);
 				// Add color to block
@@ -72,6 +81,7 @@ public partial class Main : Node
 	public override void _Ready()
 	{
 		StartRound();
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
