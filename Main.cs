@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Main : Node
 {
@@ -26,6 +25,16 @@ public partial class Main : Node
 	// Blocks are 8px in height
 	private int[] rowPositions = { 1, 10, 19, 28, 37, 46, 55 };
 
+	Color[] colors = {
+		Color.Color8(247, 47, 150, 255), // Pink
+		Color.Color8(175, 65, 84, 255), // Light Red
+		Color.Color8(211, 84, 0, 255), // Orange
+		Color.Color8(255, 246, 143, 255), // Yellow
+		Color.Color8(22, 160, 133, 255), // Green
+		Color.Color8(30, 81, 123, 255), // Blue
+		Color.Color8(102, 51, 153, 255), // Purple
+	};
+
 	private void StartRound()
 	{
 		Ball ball = BallScene.Instantiate<Ball>();
@@ -35,7 +44,6 @@ public partial class Main : Node
 		ball.Place(ballStartPosition.Position);
 		ball.LinearVelocity = new Vector2(GD.RandRange(-300, 300), -150);
 
-
 		AddChild(ball);
 
 		// Spawn the blocks
@@ -44,16 +52,18 @@ public partial class Main : Node
 
 	private void SpawnBlocks()
 	{
-		foreach (int row in rowPositions)
+		for (int i = 0; i < rowPositions.Length; i++)
 		{
 			foreach (int column in columnPositions)
 			{
 				// Instance a new node at each position
 				Block block = BlockScene.Instantiate<Block>();
 				// Set the position of the new node
-				block.Position = getBlockSpawnPosition(column, row);
+				block.Position = getBlockSpawnPosition(column, rowPositions[i]);
 				// Add the new node to the scene
 				AddChild(block);
+				// Add color to block
+				block.SetColor(colors[i]);
 			}
 		}
 	}
