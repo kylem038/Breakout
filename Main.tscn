@@ -35,7 +35,7 @@ BallScene = ExtResource("3_lfnmn")
 BlockScene = ExtResource("2_1m3en")
 
 [node name="Player" parent="." instance=ExtResource("1_763mk")]
-disable_mode = 1
+collision_mask = 3
 angular_damp_mode = 1
 
 [node name="PlayerStartPosition" type="Marker2D" parent="."]
