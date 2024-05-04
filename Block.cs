@@ -8,7 +8,7 @@ public partial class Block : StaticBody2D
 	[Signal]
 	public delegate void ScoreEventHandler();
 
-	private int _increaseSpeed = 5;
+	private int _increaseSpeed = 3;
 
 	// Reference to the TextureRect child node
     private TextureRect textureRect;
