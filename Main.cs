@@ -11,7 +11,7 @@ public partial class Main : Node
 	public PackedScene BlockScene {get; set;}
 
 	private int _score = 0;
-	private int _health = 4;
+	private int _health = 1;
 
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
@@ -49,14 +49,11 @@ public partial class Main : Node
 	private void OnBottomBoundaryBodyEntered(Node2D body)
 	{
 		HUD hud = GetNode<HUD>("HUD");
-		if (_health == 1)
+		_health -= 1;
+		hud.UpdateHealth(_health);
+		if (_health == 0)
 		{
-			GD.Print("GAME OVER");
-		}
-		else
-		{
-			_health -= 1;
-			hud.UpdateHealth(_health);
+			GameOver();
 		}
 
 
@@ -104,6 +101,26 @@ public partial class Main : Node
 		// Set health to 4
 		_health = 4;
 		hud.UpdateHealth(_health);
+
+		// Set player position back to default
+		Player player = GetNode<Player>("Player");
+		Marker2D startPosition = GetNode<Marker2D>("PlayerStartPosition");
+		player.Position = startPosition.Position;
+
+		// Spawn blocks
+		SpawnBlocks();
+
+		// Show Start button
+
+	}
+
+	private void GameOver()
+	{
+		// Despawn ball
+		Ball ball = GetNode<Ball>("Ball");
+		ball.QueueFree();
+		// Despawn all blocks
+		GetTree().CallGroup("blocks", Node.MethodName.QueueFree);
 	}
 
 	// Called when the node enters the scene tree for the first time.
