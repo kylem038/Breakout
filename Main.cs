@@ -32,7 +32,7 @@ public partial class Main : Node
 		Color.Color8(255, 246, 143, 255), // Yellow
 		Color.Color8(22, 160, 133, 255), // Green
 		Color.Color8(30, 81, 123, 255), // Blue
-		Color.Color8(102, 51, 153, 255), // Purple
+		Color.Color8(159, 90, 253, 255), // Purple
 	};
 
 	private void StartRound()
