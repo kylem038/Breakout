@@ -109,9 +109,6 @@ public partial class Main : Node
 
 		// Spawn blocks
 		SpawnBlocks();
-
-		// Show Start button
-
 	}
 
 	private void GameOver()
@@ -121,12 +118,16 @@ public partial class Main : Node
 		ball.QueueFree();
 		// Despawn all blocks
 		GetTree().CallGroup("blocks", Node.MethodName.QueueFree);
+		// Show Game over
+		HUD hud = GetNode<HUD>("HUD");
+		hud.ShowGameOver();
+
+		NewGame();
 	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// Spawn the blocks
 		SpawnBlocks();
 	}
 
