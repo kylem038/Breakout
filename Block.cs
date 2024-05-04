@@ -5,8 +5,12 @@ public partial class Block : StaticBody2D
 	[Signal]
 	public delegate void HitEventHandler();
 
+	private int _increaseSpeed = 7;
+
 	private void OnBodyEntered(Node2D body)
 	{
+		Ball ball = GetNodeOrNull<Ball>("/root/Main/Ball");
+		ball?.IncreaseVelocity(_increaseSpeed);
 		QueueFree();
 	}
 

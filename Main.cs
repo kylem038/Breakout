@@ -20,7 +20,7 @@ public partial class Main : Node
 		return new Vector2(column, row);
 	}
 
-	private int[] rowPositions = { 64, 128, 196 };
+	private int[] rowPositions = { 0, 8, 16 };
 
 	private void StartRound()
 	{
@@ -30,7 +30,6 @@ public partial class Main : Node
 
 		ball.Place(ballStartPosition.Position);
 		ball.LinearVelocity = new Vector2(GD.RandRange(-300, 300), -150);
-		// ball.LinearVelocity = new Vector2(0, -150);
 
 
 		AddChild(ball);

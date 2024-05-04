@@ -29,6 +29,18 @@ public partial class Ball : RigidBody2D
 		LinearVelocity = currentVelocity;
 	}
 
+	public void IncreaseVelocity(float increaseAmount)
+	{
+		// Get the current velocity
+        Vector2 currentVelocity = LinearVelocity;
+
+        // Normalize the velocity to preserve direction
+        currentVelocity = currentVelocity.Normalized() * (currentVelocity.Length() + increaseAmount);
+
+        // Set the new velocity
+        LinearVelocity = currentVelocity;
+	}
+
 	private void ConnectSignals()
 	{
 	}
