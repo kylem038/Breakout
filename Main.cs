@@ -11,8 +11,10 @@ public partial class Main : Node
 	public PackedScene BlockScene {get; set;}
 
 	private int _score = 0;
+	private int _highScore = 0;
 	private int _health = 4;
 	private bool _hitCeiling = false;
+	private bool _spawnBlocks = true;
 
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
@@ -24,7 +26,6 @@ public partial class Main : Node
 	// Blocks are 8px in height
 	// +19 to account for score at top
 	private int[] rowPositions = { 20, 29, 38, 47, 56, 65, 74 };
-
 
 	private Vector2 getBlockSpawnPosition(int column, int row)
 	{
@@ -48,11 +49,21 @@ public partial class Main : Node
 		hud.UpdateScore(_score);
 	}
 
+	private void RemoveBall(ref Node2D body)
+	{
+		body.QueueFree();
+	}
+
 	private void OnBottomBoundaryBodyEntered(Node2D body)
 	{
+		RemoveBall(ref body);
 		HUD hud = GetNode<HUD>("HUD");
 		_health -= 1;
 		hud.UpdateHealth(_health);
+		if (_health != 0)
+		{
+			SpawnBall();
+		}
 		if (_health == 0)
 		{
 			GameOver();
@@ -73,7 +84,7 @@ public partial class Main : Node
 		}
 	}
 
-	private void StartRound()
+	private void SpawnBall()
 	{
 		Ball ball = BallScene.Instantiate<Ball>();
 
@@ -82,7 +93,7 @@ public partial class Main : Node
 		ball.Place(ballStartPosition.Position);
 		ball.LinearVelocity = new Vector2(GD.RandRange(-300, 300), -150);
 
-		AddChild(ball);
+		CallDeferred("add_child", ball);
 	}
 
 	private void SpawnBlocks()
@@ -122,19 +133,22 @@ public partial class Main : Node
 		player.Position = startPosition.Position;
 
 		// Spawn blocks
-		SpawnBlocks();
+		_spawnBlocks = true;
 	}
 
 	private void GameOver()
 	{
-		// Despawn ball
-		Ball ball = GetNode<Ball>("Ball");
-		ball.QueueFree();
 		// Despawn all blocks
 		GetTree().CallGroup("blocks", Node.MethodName.QueueFree);
 		// Show Game over
 		HUD hud = GetNode<HUD>("HUD");
 		hud.ShowGameOver();
+		// Update high score if necessary
+		if (_score > _highScore)
+		{
+			_highScore = _score;
+			hud.UpdateHighScore(_highScore);
+		}
 
 		NewGame();
 	}
@@ -142,11 +156,18 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		SpawnBlocks();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		// Using a flag here to manage spawning blocks
+		// If I use it elsewhere it tries to do things in the middle of the physics process
+		// Doing it here ensures the physics process it complete before acting
+		if(_spawnBlocks)
+		{
+			SpawnBlocks();
+			_spawnBlocks = false;
+		}
 	}
 }

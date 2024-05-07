@@ -4,7 +4,7 @@ using System;
 public partial class HUD : CanvasLayer
 {
 	[Signal]
-    public delegate void StartGameEventHandler();
+	public delegate void SpawnBallEventHandler();
 
 	public void ShowMessage(string text)
 	{
@@ -31,6 +31,11 @@ public partial class HUD : CanvasLayer
 		GetNode<Label>("ScoreLabel").Text = "Score: " + score.ToString();
 	}
 
+	public void UpdateHighScore(int highscore)
+	{
+		GetNode<Label>("HighScoreLabel").Text = "High Score: " + highscore.ToString();
+	}
+
 	public void UpdateHealth(int health)
 	{
 		GetNode<Label>("HealthLabel").Text = "Health: " + health.ToString();
@@ -39,7 +44,7 @@ public partial class HUD : CanvasLayer
 	private void OnStartButtonPressed()
 	{
 		GetNode<Button>("StartButton").Hide();
-		EmitSignal(SignalName.StartGame);
+		EmitSignal(SignalName.SpawnBall);
 	}
 
 	private void OnMessageTimerTimeout()
