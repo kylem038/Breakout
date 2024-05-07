@@ -11,7 +11,8 @@ public partial class Main : Node
 	public PackedScene BlockScene {get; set;}
 
 	private int _score = 0;
-	private int _health = 1;
+	private int _health = 4;
+	private bool _hitCeiling = false;
 
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
@@ -23,6 +24,7 @@ public partial class Main : Node
 	// Blocks are 8px in height
 	// +19 to account for score at top
 	private int[] rowPositions = { 20, 29, 38, 47, 56, 65, 74 };
+
 
 	private Vector2 getBlockSpawnPosition(int column, int row)
 	{
@@ -55,8 +57,20 @@ public partial class Main : Node
 		{
 			GameOver();
 		}
+	}
 
-
+	private void OnTopBoundaryBodyEntered(Node2D body)
+	{
+		if (body is Ball)
+		{
+			if (!_hitCeiling)
+			{
+				_hitCeiling = true;
+				// Reduce paddle width by 75%
+				Player player = GetNode<Player>("Player");
+				player.ReducePaddleWidth();
+			}
+		}
 	}
 
 	private void StartRound()

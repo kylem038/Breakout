@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctwpjkrmdesau"]
+[gd_scene load_steps=16 format=3 uid="uid://ctwpjkrmdesau"]
 
 [ext_resource type="PackedScene" uid="uid://ctmjkt8tarcnl" path="res://Player.tscn" id="1_763mk"]
 [ext_resource type="Script" path="res://Main.cs" id="1_qg1h1"]
@@ -11,6 +11,9 @@ friction = 0.0
 bounce = 1.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ax8ed"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f023x"]
+size = Vector2(640, 8)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_p1dx2"]
 friction = 0.0
@@ -52,13 +55,22 @@ position = Vector2(320, 312)
 position = Vector2(320, 20)
 disable_mode = 2
 physics_material_override = SubResource("PhysicsMaterial_jqytx")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_ax8ed")
 one_way_collision = true
 one_way_collision_margin = 10.0
+
+[node name="TopBoundary" type="Area2D" parent="TopWall"]
+position = Vector2(0, -2)
+disable_mode = 2
+collision_layer = 10
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall/TopBoundary"]
+shape = SubResource("RectangleShape2D_f023x")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
 position = Vector2(640, 192)
@@ -75,6 +87,7 @@ position = Vector2(320, 360)
 collision_layer = 9
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_hqfrv")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
 shape = SubResource("WorldBoundaryShape2D_hetso")
@@ -100,5 +113,6 @@ one_way_collision = true
 
 [node name="HUD" parent="." instance=ExtResource("5_tp38a")]
 
+[connection signal="body_entered" from="TopWall/TopBoundary" to="." method="OnTopBoundaryBodyEntered"]
 [connection signal="body_entered" from="BottomWall/BottomBoundary" to="." method="OnBottomBoundaryBodyEntered"]
 [connection signal="StartGame" from="HUD" to="." method="StartRound"]
