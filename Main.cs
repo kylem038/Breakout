@@ -25,7 +25,6 @@ public partial class Main : Node
 	// +19 to account for score at top
 	private int[] rowPositions = { 20, 29, 38, 47, 56, 65, 74 };
 
-
 	private Vector2 getBlockSpawnPosition(int column, int row)
 	{
 		return new Vector2(column, row);
