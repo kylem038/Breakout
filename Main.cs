@@ -12,6 +12,7 @@ public partial class Main : Node
 
 	private int _score = 0;
 	private int _health = 4;
+	private bool _hitCeiling = false;
 
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
@@ -63,7 +64,13 @@ public partial class Main : Node
 	{
 		if (body is Ball)
 		{
-			GD.Print("Ball hit top boundary?");
+			if (!_hitCeiling)
+			{
+				_hitCeiling = true;
+				// Reduce paddle width by 75%
+				Player player = GetNode<Player>("Player");
+				player.ReducePaddleWidth();
+			}
 		}
 	}
 
