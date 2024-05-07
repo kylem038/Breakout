@@ -11,7 +11,7 @@ public partial class Main : Node
 	public PackedScene BlockScene {get; set;}
 
 	private int _score = 0;
-	private int _health = 1;
+	private int _health = 4;
 
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
@@ -22,7 +22,9 @@ public partial class Main : Node
 	// We want a 1px gutter between each block
 	// Blocks are 8px in height
 	// +19 to account for score at top
-	private int[] rowPositions = { 20, 29, 38, 47, 56, 65, 74 };
+	// private int[] rowPositions = { 20, 29, 38, 47, 56, 65, 74 };
+	private int[] rowPositions = { 21 };
+
 
 	private Vector2 getBlockSpawnPosition(int column, int row)
 	{
@@ -48,15 +50,21 @@ public partial class Main : Node
 
 	private void OnBottomBoundaryBodyEntered(Node2D body)
 	{
-		HUD hud = GetNode<HUD>("HUD");
-		_health -= 1;
-		hud.UpdateHealth(_health);
-		if (_health == 0)
+		// HUD hud = GetNode<HUD>("HUD");
+		// _health -= 1;
+		// hud.UpdateHealth(_health);
+		// if (_health == 0)
+		// {
+		// 	GameOver();
+		// }
+	}
+
+	private void OnTopBoundaryBodyEntered(Node2D body)
+	{
+		if (body is Ball)
 		{
-			GameOver();
+			GD.Print("Ball hit top boundary?");
 		}
-
-
 	}
 
 	private void StartRound()
