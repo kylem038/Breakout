@@ -14,6 +14,7 @@ public partial class Main : Node
 	private int _highScore = 0;
 	private int _health = 4;
 	private bool _hitCeiling = false;
+	private bool _spawnBlocks = true;
 
 	// We want a 1px gutter between each block
 	// Blocks are 48px wide
@@ -122,7 +123,7 @@ public partial class Main : Node
 		player.Position = startPosition.Position;
 
 		// Spawn blocks
-		// SpawnBlocks();
+		_spawnBlocks = true;
 	}
 
 	private void GameOver()
@@ -148,11 +149,18 @@ public partial class Main : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		SpawnBlocks();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		// Using a flag here to manage spawning blocks
+		// If I use it elsewhere it tries to do things in the middle of the physics process
+		// Doing it here ensures the physics process it complete before acting
+		if(_spawnBlocks)
+		{
+			SpawnBlocks();
+			_spawnBlocks = false;
+		}
 	}
 }
