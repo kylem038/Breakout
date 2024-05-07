@@ -11,6 +11,7 @@ public partial class Main : Node
 	public PackedScene BlockScene {get; set;}
 
 	private int _score = 0;
+	private int _highScore = 0;
 	private int _health = 4;
 	private bool _hitCeiling = false;
 
@@ -121,7 +122,7 @@ public partial class Main : Node
 		player.Position = startPosition.Position;
 
 		// Spawn blocks
-		SpawnBlocks();
+		// SpawnBlocks();
 	}
 
 	private void GameOver()
@@ -134,6 +135,12 @@ public partial class Main : Node
 		// Show Game over
 		HUD hud = GetNode<HUD>("HUD");
 		hud.ShowGameOver();
+		// Update high score if necessary
+		if (_score > _highScore)
+		{
+			_highScore = _score;
+			hud.UpdateHighScore(_highScore);
+		}
 
 		NewGame();
 	}

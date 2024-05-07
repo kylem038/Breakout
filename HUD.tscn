@@ -24,6 +24,11 @@ offset_bottom = 23.0
 grow_horizontal = 0
 text = "Health: 4"
 
+[node name="HighScoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "High Score: 0"
+
 [node name="Message" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
