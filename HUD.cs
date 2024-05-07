@@ -4,7 +4,7 @@ using System;
 public partial class HUD : CanvasLayer
 {
 	[Signal]
-    public delegate void StartGameEventHandler();
+	public delegate void SpawnBallEventHandler();
 
 	public void ShowMessage(string text)
 	{
@@ -44,7 +44,7 @@ public partial class HUD : CanvasLayer
 	private void OnStartButtonPressed()
 	{
 		GetNode<Button>("StartButton").Hide();
-		EmitSignal(SignalName.StartGame);
+		EmitSignal(SignalName.SpawnBall);
 	}
 
 	private void OnMessageTimerTimeout()

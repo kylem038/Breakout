@@ -49,11 +49,21 @@ public partial class Main : Node
 		hud.UpdateScore(_score);
 	}
 
+	private void RemoveBall(ref Node2D body)
+	{
+		body.QueueFree();
+	}
+
 	private void OnBottomBoundaryBodyEntered(Node2D body)
 	{
+		RemoveBall(ref body);
 		HUD hud = GetNode<HUD>("HUD");
 		_health -= 1;
 		hud.UpdateHealth(_health);
+		if (_health != 0)
+		{
+			SpawnBall();
+		}
 		if (_health == 0)
 		{
 			GameOver();
@@ -74,7 +84,7 @@ public partial class Main : Node
 		}
 	}
 
-	private void StartRound()
+	private void SpawnBall()
 	{
 		Ball ball = BallScene.Instantiate<Ball>();
 
@@ -83,7 +93,7 @@ public partial class Main : Node
 		ball.Place(ballStartPosition.Position);
 		ball.LinearVelocity = new Vector2(GD.RandRange(-300, 300), -150);
 
-		AddChild(ball);
+		CallDeferred("add_child", ball);
 	}
 
 	private void SpawnBlocks()
@@ -128,9 +138,6 @@ public partial class Main : Node
 
 	private void GameOver()
 	{
-		// Despawn ball
-		Ball ball = GetNode<Ball>("Ball");
-		ball.QueueFree();
 		// Despawn all blocks
 		GetTree().CallGroup("blocks", Node.MethodName.QueueFree);
 		// Show Game over

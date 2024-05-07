@@ -115,4 +115,4 @@ one_way_collision = true
 
 [connection signal="body_entered" from="TopWall/TopBoundary" to="." method="OnTopBoundaryBodyEntered"]
 [connection signal="body_entered" from="BottomWall/BottomBoundary" to="." method="OnBottomBoundaryBodyEntered"]
-[connection signal="StartGame" from="HUD" to="." method="StartRound"]
+[connection signal="SpawnBall" from="HUD" to="." method="SpawnBall"]
