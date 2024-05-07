@@ -13,7 +13,16 @@ public partial class Player : RigidBody2D
 	public void ReducePaddleWidth()
 	{
 		// Improvement: Animate the reduction in size
+		// Reduce collision box size
+		RectangleShape2D shape = new RectangleShape2D();
+		shape.Size = new Vector2(originalWidth * 0.75f, originalHeight);
+		collisionShape2D.SetDeferred(CollisionShape2D.PropertyName.Shape, shape);
+		// Reduce visual texture size
 		textureRect.Size = new Vector2(originalWidth * 0.75F, originalHeight);
+
+        // Calculate the new position to center the TextureRect horizontally
+		// Not sure why 10 is the magic number here
+        textureRect.Position = new Vector2(textureRect.Position.X + 10, textureRect.Position.Y);
 	}
 
 	public override void _Ready()
