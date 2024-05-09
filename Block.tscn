@@ -23,11 +23,13 @@ script = ExtResource("1_t8rja")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.968627, 0.184314, 0.588235, 1)
+use_parent_material = true
 offset_right = 48.0
 offset_bottom = 8.0
 texture = SubResource("CanvasTexture_2bkrb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(24, 4)
 shape = SubResource("RectangleShape2D_r2rai")
 
