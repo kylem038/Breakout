@@ -1,15 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://w8hnl8bo7deg"]
+[gd_scene load_steps=6 format=3 uid="uid://w8hnl8bo7deg"]
 
 [ext_resource type="Script" path="res://Block.cs" id="1_t8rja"]
-[ext_resource type="Shader" path="res://Block.gdshader" id="2_xjlvb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cru71"]
 friction = 0.0
 bounce = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pn2ms"]
-shader = ExtResource("2_xjlvb")
-shader_parameter/scanline_count = 50.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2bkrb"]
 
@@ -28,12 +23,13 @@ script = ExtResource("1_t8rja")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.968627, 0.184314, 0.588235, 1)
-material = SubResource("ShaderMaterial_pn2ms")
+use_parent_material = true
 offset_right = 48.0
 offset_bottom = 8.0
 texture = SubResource("CanvasTexture_2bkrb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(24, 4)
 shape = SubResource("RectangleShape2D_r2rai")
 
