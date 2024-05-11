@@ -25,6 +25,12 @@ public partial class Player : RigidBody2D
         textureRect.Position = new Vector2(textureRect.Position.X + 10, textureRect.Position.Y);
 	}
 
+	private void OnBodyEnteredPlayer(Node2D body)
+	{
+		Ball ball = GetNode<Ball>("/root/Main/Ball");
+		ball.ClampVelocity();
+	}
+
 	public override void _Ready()
 	{
 		collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
