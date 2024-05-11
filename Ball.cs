@@ -4,34 +4,36 @@ public partial class Ball : RigidBody2D
 {
 	// Velocity range
 	// We don't want the ball moving too fast or too slow
-	public float MinVelocity = 100.0f;
-    public float MaxVelocity = 400.0f;
+	public float MinVelocity = 150.0f;
+    public float MaxVelocity = 350.0f;
 
 	public void Place(Vector2 position)
 	{
 		Position = position;
 	}
 
-	private void PlayerCollision()
+	public void ClampVelocity()
 	{
-		// get current linear velocity
-		Vector2 currentVelocity = LinearVelocity;
+		if (LinearVelocity.X > 0)
+		{
+			Vector2 currentVelocity = LinearVelocity;
 
-		// Reverse direction no matter the direction the collision comes from (X or Y)
-		currentVelocity *= -1;
+			// Set the new velocity
+			LinearVelocity = new Vector2(
+				x: Mathf.Clamp(currentVelocity.X, MinVelocity, MaxVelocity),
+				y: Mathf.Clamp(currentVelocity.Y, -MaxVelocity, MaxVelocity)
+			);
+		} 
+		else 
+		{
+			Vector2 currentVelocity = LinearVelocity;
 
-		LinearVelocity = currentVelocity;
-	}
-
-	private void BlockCollision()
-	{
-		// get current linear velocity
-		Vector2 currentVelocity = LinearVelocity;
-
-		// Reverse direction no matter the direction the collision comes from (X or Y)
-		currentVelocity *= -1;
-
-		LinearVelocity = currentVelocity;
+			// Set the new velocity
+			LinearVelocity = new Vector2(
+				x: Mathf.Clamp(currentVelocity.X, -MaxVelocity, -MinVelocity),
+				y: Mathf.Clamp(currentVelocity.Y, -MaxVelocity, MaxVelocity)
+			);
+		}
 	}
 
 	public void IncreaseVelocity(float increaseAmount)
@@ -49,14 +51,9 @@ public partial class Ball : RigidBody2D
 		);
 	}
 
-	private void ConnectSignals()
-	{
-	}
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		ConnectSignals();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -163,7 +163,7 @@ public partial class Main : Node
 	{
 		// Using a flag here to manage spawning blocks
 		// If I use it elsewhere it tries to do things in the middle of the physics process
-		// Doing it here ensures the physics process it complete before acting
+		// Doing it here ensures the physics process is complete before acting
 		if(_spawnBlocks)
 		{
 			SpawnBlocks();
