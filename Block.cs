@@ -22,6 +22,7 @@ public partial class Block : StaticBody2D
 	{
 		Ball ball = GetNodeOrNull<Ball>("/root/Main/Ball");
 		ball?.IncreaseVelocity(_increaseSpeed);
+		GetNode<AudioStreamPlayer>("/root/Main/Block/ArcadeExplosion").Play();
 		EmitSignal(SignalName.Score);
 		QueueFree();
 	}

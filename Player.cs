@@ -27,8 +27,14 @@ public partial class Player : RigidBody2D
 
 	private void OnBodyEnteredPlayer(Node2D body)
 	{
-		Ball ball = GetNode<Ball>("/root/Main/Ball");
-		ball.ClampVelocity();
+		Ball ball = GetNodeOrNull<Ball>("/root/Main/Ball");
+		if (ball != null)
+		{
+			ball.ClampVelocity();
+		}
+		
+
+		GetNode<AudioStreamPlayer>("PingPongBall").Play();
 	}
 
 	public override void _Ready()
